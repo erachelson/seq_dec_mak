@@ -1,4 +1,4 @@
-This is the placeholder of the scheduling part of the course on sequential making. This should take half a day of the course
+This is the placeholder of the scheduling part of the course on sequential making. 
 
 Approximative program : 
 2h (morning)
