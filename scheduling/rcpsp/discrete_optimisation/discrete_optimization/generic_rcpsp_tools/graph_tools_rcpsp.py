@@ -7,6 +7,7 @@ from discrete_optimization.rcpsp.rcpsp_model import RCPSPModel, RCPSPModelCalend
 from discrete_optimization.rcpsp.specialized_rcpsp.rcpsp_specialized_constraints \
     import RCPSPModelSpecialConstraints, SpecialConstraintsDescription, RCPSPModelSpecialConstraintsPreemptive
 from discrete_optimization.rcpsp_multiskill.rcpsp_multiskill import MS_RCPSPModel, MS_RCPSPModel_Variant
+from discrete_optimization.rcpsp_multiskill.rcpsp_multiskill import MS_RCPSPModel, MS_RCPSPModel_Variant
 
 
 class GraphRCPSP:
