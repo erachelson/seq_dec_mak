@@ -12,15 +12,15 @@ int: n_tasks;                           % The number of tasks
 set of int: Tasks = 1..n_tasks;         % The set of all tasks
 array [Tasks] of int: d;                % The task durations
 array [Res, Tasks] of int: rr ;         % The resource requirements
-array [Tasks, Tasks] of bool: suc;      % Adjacency matrix
-array [Tasks] of set of Tasks: successors = [{p|p in Tasks where suc[j,p]}|j in Tasks];
+array [Tasks, Tasks] of bool: adj;      % Adjacency matrix
+array [Tasks] of set of Tasks: suc = [{p|p in Tasks where adj[j,p]}|j in Tasks];
 
 % Variable
 array [Tasks] of var TIMES: start;  % The start times
 var TIMES: makespan      ;  % The project duration (makespan)
 
 % precedence constraints :
-constraint forall(t in Tasks)(forall(tt in successors[t])(start[tt]>=start[t]+d[t]));
+constraint forall(t in Tasks)(forall(tt in suc[t])(start[tt]>=start[t]+d[t]));
 
 % cumulative constraints :
 bool: simplify_cumulative = true;
