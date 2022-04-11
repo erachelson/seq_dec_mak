@@ -31,4 +31,5 @@ set of int: Times = 0..max_time;     % Possible start times
 array [Tasks] of var Times: s;  % The start times
 var 0..max_time: objective      ;  % The project duration (makespan)
 
-------------------------------------%
+solve satisfy;
+output["Test"];
