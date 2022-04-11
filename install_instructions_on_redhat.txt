@@ -1,0 +1,6 @@
+module load python/3.7
+python -m venv ~/.local/venvs/seq_dec_mak
+source ~/.local/venvs/seq_dec_mak/bin/activate
+pip install --upgrade pip
+python -m ipykernel install --user --name=seq_dec_mak
+jupyter notebook

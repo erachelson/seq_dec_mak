@@ -1,5 +1,9 @@
 gym
 gym-jsbsim
+pygame
+ray[rllib]
+tensorflow
+torch
 pddlgym
 pyperplan
 ipykernel
