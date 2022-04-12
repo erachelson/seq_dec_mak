@@ -47,3 +47,4 @@ def sgs_algorithm(rcpsp_model: RCPSPModel,
         if all(x in done for x in schedule):
             break
     return schedule  
+

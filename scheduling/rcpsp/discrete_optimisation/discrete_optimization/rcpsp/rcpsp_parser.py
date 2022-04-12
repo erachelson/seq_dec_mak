@@ -7,8 +7,8 @@ from discrete_optimization.generic_tools.path_tools import abspath_from_file
 import csv
 path_to_data = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../data/rcpsp/")
 files_available = [os.path.join(path_to_data, f) for f in os.listdir(path_to_data)]
-path_to_results = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../data/rcpsp_sols/")
-results_available = [os.path.join(path_to_results, f) for f in os.listdir(path_to_results)]
+#path_to_results = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../data/rcpsp_sols/")
+#results_available = [os.path.join(path_to_results, f) for f in os.listdir(path_to_results)]
 
 
 def get_data_available():
