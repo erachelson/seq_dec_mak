@@ -81,7 +81,7 @@ class SimpleLineControlGymEnv(gym.Env):
         reward = exp(-fabs(self._pos_y))
         done = bool(fabs(self._pos_y) > 1.0)
         self._path.append((self._pos_x, self._pos_y))
-        return obs, reward, done, {}
+        return obs, reward if not done else PENALTY, done, {}
 
     def render(self, mode="human"):
         screen_width = 600
