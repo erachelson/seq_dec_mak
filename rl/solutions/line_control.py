@@ -6,7 +6,7 @@ from math import sqrt, exp, fabs
 
 
 HORIZON = 500
-ACCELERATION_MIN = 0.5
+ACCELERATION_MIN = 500
 PENALTY = -1000.
 
 
@@ -22,7 +22,7 @@ class SimpleLineControlGymEnv(gym.Env):
         """
         inf = np.finfo(np.float32).max
         self.action_space = gym.spaces.Box(
-            np.array([-1.0, -1.0]), np.array([1.0, 1.0]), dtype=np.float32
+            np.array([-1000.0, -1000.0]), np.array([1000.0, 1000.0]), dtype=np.float32
         )
         self.observation_space = gym.spaces.Box(
             np.array([-inf, -inf, -inf, -inf]),
@@ -73,6 +73,11 @@ class SimpleLineControlGymEnv(gym.Env):
             return obs, PENALTY, True, {}
         self._speed_x = self._speed_x + action[0] * self._delta_t
         self._speed_y = self._speed_y + action[1] * self._delta_t
+        if self._speed_x < 0.:
+            obs = np.array(
+                [self._pos_x, self._pos_y, self._speed_x, self._speed_y], dtype=np.float32
+            )
+            return obs, PENALTY, True, {}
         self._pos_x = self._pos_x + self._delta_t * self._speed_x
         self._pos_y = self._pos_y + self._delta_t * self._speed_y
         obs = np.array(
