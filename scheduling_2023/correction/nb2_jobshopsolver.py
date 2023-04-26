@@ -47,28 +47,37 @@ class SolverJobShop:
     
     def init_model(self, max_time: int = 300):
         # Write variables, constraints
+
+        # Create array of variables :
+        # starts[j][k] store the start date of the k-th part of job j
         starts = [[self.model.NewIntVar(0, max_time, f"starts_{j,k}")
                    for k in range(len(self.jobshop_problem.list_jobs[j]))]
                   for j in range(self.jobshop_problem.n_jobs)]
+        # Same idea for ends
         ends = [[self.model.NewIntVar(0, max_time, f"ends_{j, k}")
                  for k in range(len(self.jobshop_problem.list_jobs[j]))]
                 for j in range(self.jobshop_problem.n_jobs)]
+        # Create the interval variables
         intervals = [[self.model.NewIntervalVar(start=starts[j][k],
                                                 size=self.jobshop_problem.list_jobs[j][k].processing_time,
                                                 end=ends[j][k],
                                                 name=f"task_{j, k}")
                      for k in range(len(self.jobshop_problem.list_jobs[j]))]
                      for j in range(self.jobshop_problem.n_jobs)]
+        # Precedence constraint between subparts of each job.
         for j in range(self.jobshop_problem.n_jobs):
             for k in range(1, len(self.jobshop_problem.list_jobs[j])):
                 self.model.Add(starts[j][k] >= ends[j][k-1])
+        # No overlap task on the same machine.
         for machine in self.jobshop_problem.job_per_machines:
             self.model.AddNoOverlap([intervals[x[0]][x[1]]
                                      for x in self.jobshop_problem.job_per_machines[machine]])
+        # Objective value variable
         makespan = self.model.NewIntVar(0, max_time, name="makespan")
         self.model.AddMaxEquality(makespan, [ends[i][j] for i in range(len(ends))
                                              for j in range(len(ends[i]))])
         self.model.Minimize(makespan)
+        # Store the variables in some dictionnaries.
         self.variables["starts"] = starts
         self.variables["ends"] = ends
         
