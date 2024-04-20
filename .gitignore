@@ -131,3 +131,9 @@ dmypy.json
 # Reveal
 site
 slides
+
+#IntelliJ 
+.idea/
+
+# Mac Os files
+*.DS_Store
