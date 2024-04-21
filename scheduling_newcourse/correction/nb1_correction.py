@@ -16,7 +16,7 @@ def sgs_algorithm(rcpsp_model: RCPSPModel,
     # Duration of task
     duration_task = {k: rcpsp_model.mode_details[k][1]["duration"] for k in rcpsp_model.mode_details}
     # object to keep track of resource availability.
-    resources_availability = {r: rcpsp_model.get_resource_availability_array(r) 
+    resources_availability = {r: np.array(rcpsp_model.get_resource_availability_array(r))
                               for r in rcpsp_model.resources_list}
     
     done = set()
