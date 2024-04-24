@@ -9,11 +9,14 @@ def sgs_algorithm(rcpsp_model: RCPSPModel,
             succ = rcpsp_model.successors[k]
             for s in succ:
                 predecessors[s].add(k)
+    # Store partial schedule
     schedule = {k: {"start_time": None,
                     "end_time": None}
                 for k in rcpsp_model.tasks_list}
+    # Duration of task
     duration_task = {k: rcpsp_model.mode_details[k][1]["duration"] for k in rcpsp_model.mode_details}
-    resources_availability = {r: rcpsp_model.get_resource_availability_array(r) 
+    # object to keep track of resource availability.
+    resources_availability = {r: np.array(rcpsp_model.get_resource_availability_array(r))
                               for r in rcpsp_model.resources_list}
     
     done = set()

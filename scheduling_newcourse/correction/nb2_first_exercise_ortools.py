@@ -1,7 +1,5 @@
 from ortools.sat.python import cp_model
 # Variables
-# There is a risk of integer overflow when computing a*b*c*d
-# We need small domains...
 model = cp_model.CpModel()
 start = model.NewIntVar(0, 10, "start")
 end = model.NewIntVar(0, 10, "end")

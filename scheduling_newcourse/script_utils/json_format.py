@@ -1,7 +1,7 @@
 import json
 from typing import Dict
 from discrete_optimization.rcpsp.specialized_rcpsp.rcpsp_specialized_constraints import SpecialConstraintsDescription, \
-    RCPSPModelPreemptive, RCPSPModelSpecialConstraints, \
+    RCPSPModelPreemptive, \
     RCPSPModelSpecialConstraintsPreemptive
 from discrete_optimization.rcpsp.rcpsp_model import RCPSPModel
 from discrete_optimization.rcpsp_multiskill.rcpsp_multiskill import Employee, SkillDetail, MS_RCPSPModel
@@ -9,7 +9,7 @@ import numpy as np
 
 
 def discrete_to_full_numpy(discretized_ressource_array, full_horizon):
-    ressource_availability = np.zeros(full_horizon, dtype=np.int)
+    ressource_availability = np.zeros(full_horizon, dtype=int)
     for p in discretized_ressource_array:
         ressource_availability[p[1]:p[1]+p[2]] = p[0]
     return ressource_availability
@@ -98,7 +98,7 @@ def load_instance_rcpsp(json_path=None, dict_instance=None):
                                   "SingleModeRCPSPModel"}:
         model = RCPSPModel(**dict_instance)
     if dict_instance["class"] == "RCPSPModelSpecialConstraints":
-        model = RCPSPModelSpecialConstraints(**dict_instance)
+        model = RCPSPModel(**dict_instance)
     if dict_instance["class"] == "RCPSPModelPreemptive":
         model = RCPSPModelPreemptive(**dict_instance)
     if dict_instance["class"] == "RCPSPModelSpecialConstraintsPreemptive":
